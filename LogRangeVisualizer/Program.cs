@@ -55,7 +55,12 @@ namespace LogRangeVisualizer
         {
             SvgWriter writer = new SvgWriter(filename);
 
-            writer.WriteHeader(config.Timelines.Max(t => t.TimelineWidthPixels) + 100, (config.Timelines.Count + 1) * TIMELINE_HEIGHT_PIXELS);
+            int width = config.Timelines.Max(t => t.TimelineWidthPixels) + 75;
+            int height = (config.Timelines.Count + 1) * TIMELINE_HEIGHT_PIXELS;
+
+            writer.WriteHeader(width, height);
+
+            writer.WriteBackground(width, height);
 
             foreach (var timeline in config.Timelines)
             {

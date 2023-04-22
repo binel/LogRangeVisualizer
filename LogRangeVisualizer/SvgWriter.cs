@@ -58,6 +58,17 @@ namespace LogRangeVisualizer
             _writer.WriteEndElement();
         }
 
+        public void WriteBackground(int width, int height)
+        {
+            _writer.WriteStartElement("rect");
+            _writer.WriteAttributeString("x", "0");
+            _writer.WriteAttributeString("y", "0");
+            _writer.WriteAttributeString("width", width.ToString());
+            _writer.WriteAttributeString("height", height.ToString());
+            _writer.WriteAttributeString("fill", "white");
+            _writer.WriteEndElement();
+        }
+
         public void WriteLine(int start_x, int start_y, int end_x, int end_y, string color)
         {
             _writer.WriteStartElement("line");
