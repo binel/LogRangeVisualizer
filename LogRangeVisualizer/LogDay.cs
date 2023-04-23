@@ -103,7 +103,7 @@ namespace LogRangeVisualizer
 
             writer.WriteLine(logDayStartPixels, TimelineVerticalOffset, logDayEndPixels, TimelineVerticalOffset, Colors.BLACK);
             writer.WriteTextHorizontallyCenteredAt(Midpoint(logDayStartPixels, logDayEndPixels),
-    TimelineVerticalOffset - 5, Colors.BLACK, Label);
+                TimelineVerticalOffset - 5, Colors.BLACK, Label);
         }
 
         private int GetTickHorizontalPosition(int minutesElapsed)

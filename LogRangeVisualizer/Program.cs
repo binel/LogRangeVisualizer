@@ -24,12 +24,17 @@ namespace LogRangeVisualizer
 
         private static void Init(Configuration config)
         {
-            // Add the utc timeline 
-            var utcTimeline = new Timeline
+            // Check that there is a UTC timline. If there isn't, add one
+            Timeline utcTimeline = config.Timelines.Where(t => t.TimeZoneString == "UTC").First();
+
+            if (utcTimeline == null)
             {
-                TimeZoneString = "UTC"
-            };
-            config.Timelines.Insert(0, utcTimeline);
+                utcTimeline = new Timeline
+                {
+                    TimeZoneString = "UTC"
+                };
+                config.Timelines.Insert(0, utcTimeline);
+            }
 
             // Set the start and end time of each timeline, and the padding/offset
             int verticalOffset = 0;
