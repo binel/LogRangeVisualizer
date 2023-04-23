@@ -1,0 +1,24 @@
+{
+    "StartDateTimeUtc": "2023-11-04T05:00:00",
+    "EndDateTimeUtc": "2023-11-06T06:00:00",
+    "Timelines": [
+      {
+        "TimeZoneString": "America/Chicago"
+      },
+      {
+        "TimeZoneString": "America/St_Johns"
+      }
+    ],
+    "LogDays": [
+      {
+        "StartDateTimeUtc": "2023-11-04T05:00:00",
+        "EndDateTimeUtc": "2023-11-05T05:00:00",
+        "Label": "11/4/2023"
+      },
+      {
+        "StartDateTimeUtc": "2023-11-05T05:00:00",
+        "EndDateTimeUtc": "2023-11-06T06:00:00",
+        "Label": "11/5/2023"
+      }
+    ]
+}

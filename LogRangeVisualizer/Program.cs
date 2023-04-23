@@ -2,16 +2,16 @@
 
 namespace LogRangeVisualizer
 {
-    internal class Program
+    public class Program
     {
         const int PADDING_PIXELS = 5;
         const int TIMELINE_HEIGHT_PIXELS = 75;
 
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
-            if (args.Length != 1)
+            if (args.Length != 2)
             {
-                Console.WriteLine("Usage: LogRangeVisualizer.exe <path-to-config>");
+                Console.WriteLine("Usage: LogRangeVisualizer.exe <path-to-config> <output-file-name>");
                 return;
             }
 
@@ -19,7 +19,7 @@ namespace LogRangeVisualizer
             Configuration config = JsonSerializer.Deserialize<Configuration>(configText);
 
             Init(config);
-            Write(config, "output.svg");
+            Write(config, args[1]);
         }
 
         private static void Init(Configuration config)
