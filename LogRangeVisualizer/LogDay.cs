@@ -29,14 +29,20 @@ namespace LogRangeVisualizer
         /// </summary>
         public string Label { get; set; }
 
+        /// <summary>
+        /// Left-padding 
+        /// </summary>
         [JsonIgnore]
         public int HorizontalOffsetPixels { get; set; }
 
+        /// <summary>
+        /// Vertical padding 
+        /// </summary>
         [JsonIgnore]
         public int VerticalOffsetPixels { get; set; }
 
         /// <summary>
-        /// Where the label should start on the y axis
+        /// Where the timeline should start be on the y axis
         /// </summary>
         [JsonIgnore]
         public int TimelineVerticalOffset
@@ -47,6 +53,11 @@ namespace LogRangeVisualizer
             }
         }
 
+        /// <summary>
+        /// This is where the timeline should start from the left 
+        /// (The horizontal line will go all the way through, this 
+        /// just marks where the ticks will begin) 
+        /// </summary>
         [JsonIgnore]
         public int TimelineHorizontalOffset
         {
@@ -56,6 +67,10 @@ namespace LogRangeVisualizer
             }
         }
 
+        /// <summary>
+        /// A bit of a hack. The log day needs to be associated to 
+        /// the root UTC timeline in order to write correctly. 
+        /// </summary>
         [JsonIgnore]
         public Timeline ParentTimeline { get; set; }
 

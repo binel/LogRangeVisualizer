@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace LogRangeVisualizer
 {
+    /// <summary>
+    /// Color constants
+    /// </summary>
     public static class Colors
     {
         public const string BLACK = "#000000";

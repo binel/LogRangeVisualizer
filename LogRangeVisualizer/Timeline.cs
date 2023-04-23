@@ -85,7 +85,7 @@ namespace LogRangeVisualizer
         }
 
         /// <summary>
-        /// Where the label should start on the y axis
+        /// Where the timeline should be on the y axis 
         /// </summary>
         [JsonIgnore]
         public int TimelineVerticalOffset
@@ -96,6 +96,11 @@ namespace LogRangeVisualizer
             }
         }
 
+        /// <summary>
+        /// This is where the timeline should start from the left 
+        /// (The horizontal line will go all the way through, this 
+        /// just marks where the ticks will begin) 
+        /// </summary>
         [JsonIgnore]
         public int TimelineHorizontalOffset
         {
