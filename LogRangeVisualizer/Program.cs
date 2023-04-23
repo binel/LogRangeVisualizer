@@ -5,7 +5,7 @@ namespace LogRangeVisualizer
     internal class Program
     {
         const int PADDING_PIXELS = 5;
-        const int TIMELINE_HEIGHT_PIXELS = 100;
+        const int TIMELINE_HEIGHT_PIXELS = 75;
 
         static void Main(string[] args)
         {
@@ -40,6 +40,7 @@ namespace LogRangeVisualizer
                 t.HorizontalOffsetPixels = PADDING_PIXELS;
                 t.VerticalOffsetPixels = verticalOffset;
                 verticalOffset += TIMELINE_HEIGHT_PIXELS;
+                t.TimelineHeightPixels = TIMELINE_HEIGHT_PIXELS;
             }
 
             // Set the parent timeline and configure log days 
@@ -48,6 +49,7 @@ namespace LogRangeVisualizer
                 l.ParentTimeline = utcTimeline;
                 l.HorizontalOffsetPixels = PADDING_PIXELS;
                 l.VerticalOffsetPixels = verticalOffset;
+                l.LogDayHeightPixels = TIMELINE_HEIGHT_PIXELS;
             } 
         }
 

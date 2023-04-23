@@ -10,7 +10,6 @@ namespace LogRangeVisualizer
 {
     public class LogDay
     {
-        public const int TIMELINE_HEIGHT_PIXELS = 100;
         public const int LABEL_HORIZONTAL_MARGIN_PIXELS = 150;
         public const int MINUTES_PER_PIXEL = 3;
 
@@ -49,7 +48,7 @@ namespace LogRangeVisualizer
         {
             get
             {
-                return (TIMELINE_HEIGHT_PIXELS + VerticalOffsetPixels);
+                return (LogDayHeightPixels + VerticalOffsetPixels);
             }
         }
 
@@ -66,6 +65,12 @@ namespace LogRangeVisualizer
                 return (HorizontalOffsetPixels + LABEL_HORIZONTAL_MARGIN_PIXELS);
             }
         }
+
+        /// <summary>
+        /// The vertical height this log day should take up
+        /// </summary>
+        [JsonIgnore]
+        public int LogDayHeightPixels { get; set; }
 
         /// <summary>
         /// A bit of a hack. The log day needs to be associated to 

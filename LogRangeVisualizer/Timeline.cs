@@ -11,7 +11,6 @@ namespace LogRangeVisualizer
     {
         public const int MINOR_TICK_HEIGHT_PIXELS = 10;
         public const int MAJOR_TICK_HEIGHT_PIXELS = 25;
-        public const int TIMELINE_HEIGHT_PIXELS = 100;
         public const int LABEL_HORIZONTAL_MARGIN_PIXELS = 150;
         public const int LABEL_OFFSET_PIXELS = 5;
         public const int MINUTES_PER_PIXEL = 3;
@@ -79,7 +78,7 @@ namespace LogRangeVisualizer
         {
             get
             {
-                return (TIMELINE_HEIGHT_PIXELS - LABEL_OFFSET_PIXELS)
+                return (TimelineHeightPixels - LABEL_OFFSET_PIXELS)
                     + VerticalOffsetPixels;
             }
         }
@@ -92,7 +91,7 @@ namespace LogRangeVisualizer
         {
             get
             {
-                return (TIMELINE_HEIGHT_PIXELS + VerticalOffsetPixels);
+                return (TimelineHeightPixels + VerticalOffsetPixels);
             }
         }
 
@@ -109,6 +108,12 @@ namespace LogRangeVisualizer
                 return (HorizontalOffsetPixels + LABEL_HORIZONTAL_MARGIN_PIXELS);
             }
         }
+
+        /// <summary>
+        /// The vertical height this timeline should take up
+        /// </summary>
+        [JsonIgnore]
+        public int TimelineHeightPixels { get; set; }
 
         public void Write(SvgWriter writer)
         {
