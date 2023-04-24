@@ -45,7 +45,7 @@ namespace LogRangeVisualizer
         /// </summary>
         public Tickmark GetTickAtTime(DateTime utcTime)
         {
-            var localTime = TimeZoneInfo.ConvertTimeToUtc(utcTime, TimeZone);
+            var localTime = TimeZoneInfo.ConvertTimeFromUtc(utcTime, TimeZone);
             if (localTime.Minute != 0)
             {
                 return null;
