@@ -25,7 +25,7 @@ namespace LogRangeVisualizer
         private static void Init(Configuration config)
         {
             // Check that there is a UTC timline. If there isn't, add one
-            Timeline utcTimeline = config.Timelines.Where(t => t.TimeZoneString == "UTC").First();
+            Timeline utcTimeline = config.Timelines.Where(t => t.TimeZoneString == "UTC").FirstOrDefault();
 
             if (utcTimeline == null)
             {
@@ -36,25 +36,14 @@ namespace LogRangeVisualizer
                 config.Timelines.Insert(0, utcTimeline);
             }
 
-            // Set the start and end time of each timeline, and the padding/offset
-            int verticalOffset = 0;
             foreach (var t in config.Timelines)
             {
                 t.StartDateTimeUtc = config.StartDateTimeUtc;
                 t.EndDateTimeUtc = config.EndDateTimeUtc;
-                t.HorizontalOffsetPixels = PADDING_PIXELS;
-                t.VerticalOffsetPixels = verticalOffset;
-                verticalOffset += TIMELINE_HEIGHT_PIXELS;
-                t.TimelineHeightPixels = TIMELINE_HEIGHT_PIXELS;
             }
-
-            // Set the parent timeline and configure log days 
             foreach (var l in config.LogDays)
             {
                 l.ParentTimeline = utcTimeline;
-                l.HorizontalOffsetPixels = PADDING_PIXELS;
-                l.VerticalOffsetPixels = verticalOffset;
-                l.LogDayHeightPixels = TIMELINE_HEIGHT_PIXELS;
             } 
         }
 
@@ -62,20 +51,39 @@ namespace LogRangeVisualizer
         {
             SvgWriter writer = new SvgWriter(filename);
 
-            int width = config.Timelines.Max(t => t.TimelineWidthPixels) + 75;
+            // Initialize timeline writers
+            List<TimelineWriter> tlWriters = new List<TimelineWriter>();
+            int verticalOffset = 0;
+            foreach (var timeline in config.Timelines)
+            {
+                TimelineWriter tlWriter = new TimelineWriter(timeline);
+
+                tlWriter.HorizontalOffsetPixels = PADDING_PIXELS;
+                tlWriter.VerticalOffsetPixels = verticalOffset;
+                tlWriter.TimelineHeightPixels = TIMELINE_HEIGHT_PIXELS;
+                tlWriters.Add(tlWriter);
+
+                verticalOffset += TIMELINE_HEIGHT_PIXELS;
+            }
+
+            int width = tlWriters.Max(t => t.TimelineWidthPixels) + 75;
             int height = (config.Timelines.Count + 1) * TIMELINE_HEIGHT_PIXELS + 50;
 
             writer.WriteHeader(width, height);
-
             writer.WriteBackground(width, height);
 
-            foreach (var timeline in config.Timelines)
+            foreach (var tlwriter in tlWriters)
             {
-                timeline.Write(writer);
+                tlwriter.Write(writer);
             }
-            foreach (var logDay in config.LogDays)
+            foreach (var l in config.LogDays)
             {
-                logDay.Write(writer);
+                l.HorizontalOffsetPixels = PADDING_PIXELS;
+                l.VerticalOffsetPixels = verticalOffset;
+                l.LogDayHeightPixels = TIMELINE_HEIGHT_PIXELS;
+                // hack 
+                l.VerticalBoundaryStartingPixel = TIMELINE_HEIGHT_PIXELS;
+                l.Write(writer);
             }
 
             writer.Cleanup();

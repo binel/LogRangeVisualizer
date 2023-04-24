@@ -72,6 +72,9 @@ namespace LogRangeVisualizer
         [JsonIgnore]
         public int LogDayHeightPixels { get; set; }
 
+        [JsonIgnore]
+        public int VerticalBoundaryStartingPixel { get; set; }
+
         /// <summary>
         /// A bit of a hack. The log day needs to be associated to 
         /// the root UTC timeline in order to write correctly. 
@@ -89,13 +92,13 @@ namespace LogRangeVisualizer
                 if (current == StartDateTimeUtc)
                 {
                     logDayStartPixels = GetTickHorizontalPosition((int)Math.Ceiling((current - ParentTimeline.StartDateTimeUtc).TotalMinutes));
-                    writer.WriteOpaqueLine(logDayStartPixels, ParentTimeline.TimelineVerticalOffset, logDayStartPixels, TimelineVerticalOffset, Colors.BLACK, 0.5);
+                    writer.WriteOpaqueLine(logDayStartPixels, VerticalBoundaryStartingPixel, logDayStartPixels, TimelineVerticalOffset, Colors.BLACK, 0.5);
                 }
 
                 if (current == EndDateTimeUtc)
                 {
                     logDayEndPixels = GetTickHorizontalPosition((int)Math.Ceiling((current - ParentTimeline.StartDateTimeUtc).TotalMinutes));
-                    writer.WriteOpaqueLine(logDayEndPixels, ParentTimeline.TimelineVerticalOffset, logDayEndPixels, TimelineVerticalOffset, Colors.BLACK, 0.5);
+                    writer.WriteOpaqueLine(logDayEndPixels, VerticalBoundaryStartingPixel, logDayEndPixels, TimelineVerticalOffset, Colors.BLACK, 0.5);
                 }
 
                 current = current.AddMinutes(1);
